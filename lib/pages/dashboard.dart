@@ -3,7 +3,10 @@ import 'package:table_calendar/table_calendar.dart';
 import 'appointment_page.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _DashboardPageState createState() => _DashboardPageState();
 }
 
@@ -64,6 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
               title: const Text("Logout"),
               onTap: () {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
+                // Navigator.pushReplacementNamed(context, '/main');
               },
             ),
           ],

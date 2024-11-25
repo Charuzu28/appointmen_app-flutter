@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 // import '../components/form_button.dart';
 
 class NewAppointmentPage extends StatefulWidget {
+  const NewAppointmentPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _NewAppointmentPageState createState() => _NewAppointmentPageState();
 }
 

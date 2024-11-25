@@ -13,6 +13,8 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
+  SignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
