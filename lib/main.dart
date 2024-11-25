@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/signup': (context) => SignUpPage(),
         '/dashboard': (context) => DashboardPage(),
-        '/appointment': (context) => AppointmentPage(),
+        '/appointment': (context) => NewAppointmentPage(),
       },
     );
   }

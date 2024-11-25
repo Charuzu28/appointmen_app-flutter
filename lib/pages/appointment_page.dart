@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import '../components/form_input_field.dart';
-import '../components/form_button.dart';
+// import '../components/form_input_field.dart';
+// import '../components/form_button.dart';
 
-class AppointmentPage extends StatelessWidget {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _timeController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+class NewAppointmentPage extends StatefulWidget {
+  @override
+  _NewAppointmentPageState createState() => _NewAppointmentPageState();
+}
+
+class _NewAppointmentPageState extends State<NewAppointmentPage> {
+  final _formKey = GlobalKey<FormState>();
+  // DateTime _appointmentDate = DateTime.now();
+  String _selectedOffice = "Registrar";
+  final TextEditingController _reasonController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Schedule Appointment"),
+        title: const Text("New Appointment"),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
@@ -22,57 +26,46 @@ class AppointmentPage extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: [
-              FormInputField(
-                hintText: "Appointment Title",
-                controller: _titleController,
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "Reason for Appointment",
+                ),
+                controller: _reasonController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Title is required';
-                  }
-                  return null;
-                },
-              ),
-              FormInputField(
-                hintText: "Date (e.g., 2024-12-01)",
-                controller: _dateController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Date is required';
-                  }
-                  return null;
-                },
-              ),
-              FormInputField(
-                hintText: "Time (e.g., 10:00 AM)",
-                controller: _timeController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Time is required';
-                  }
-                  return null;
-                },
-              ),
-              FormInputField(
-                hintText: "Description",
-                controller: _descriptionController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Description is required';
+                    return "Reason is required";
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              FormButton(
-                label: "Submit",
+              DropdownButtonFormField(
+                value: _selectedOffice,
+                items: ["Registrar", "Cashier", "Dean's Office"]
+                    .map((office) => DropdownMenuItem(
+                          value: office,
+                          child: Text(office),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedOffice = value!;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: "Office",
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Appointment Scheduled!')),
-                    );
+                    // Save appointment logic here
                     Navigator.pop(context);
                   }
                 },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                child: const Text("Submit"),
               ),
             ],
           ),

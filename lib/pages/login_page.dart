@@ -31,12 +31,12 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Welcome Back!",
+                    "Hello, Students!",
                     style: TextStyle(color: Colors.white, fontSize: 40),
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Sign In to Manage Appointments",
+                    "Sign In to Set Appointment",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
