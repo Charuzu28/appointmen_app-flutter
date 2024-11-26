@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Hello, Students!",
+                    "Hello, Student!",
                     style: TextStyle(color: Colors.white, fontSize: 40),
                   ),
                   SizedBox(height: 10),
