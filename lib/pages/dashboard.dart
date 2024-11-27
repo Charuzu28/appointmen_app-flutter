@@ -51,14 +51,14 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: const Icon(Icons.person),
               title: const Text("Profile"),
               onTap: () {
-                // Navigate to Profile Page
+                //to navigate to profile
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text("Settings"),
               onTap: () {
-                // Navigate to Settings Page
+                // to navigate to settings
               },
             ),
             const Divider(),
@@ -67,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
               title: const Text("Logout"),
               onTap: () {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
-                // Navigator.pushReplacementNamed(context, '/main');
+                // Navigator.pushReplacement(context, '/main');
               },
             ),
           ],
@@ -144,7 +144,8 @@ class _DashboardPageState extends State<DashboardPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewAppointmentPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const NewAppointmentPage()),
                 );
               },
               icon: const Icon(Icons.add),
