@@ -1,11 +1,14 @@
+import 'package:appointment_app_flutter/auth/auth_service.dart';
 import 'package:appointment_app_flutter/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import '../components/form_input_field.dart';
 import '../components/form_button.dart';
 import '../utilities/validators.dart';
 import 'dashboard.dart';
+import 'dart:developer';
 
 class SignUpPage extends StatelessWidget {
+  final _auth = AuthService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -104,11 +107,7 @@ class SignUpPage extends StatelessWidget {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               // Navigate to the dashboard if validation is successful
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashboardPage()),
-                              );
+                              _signup(context);
                             }
                           },
                         ),
@@ -140,5 +139,16 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _signup(BuildContext context) async {
+    final user = await _auth.createUserWithEmailAndPassword(
+        _emailController.text, _passwordController.text);
+    if (user != null) {
+      log("User Created Successfully");
+      Navigator.pushReplacementNamed(context, "/main");
+    } else {
+      log("Signup Failed");
+    }
   }
 }

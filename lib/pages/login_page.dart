@@ -4,8 +4,13 @@ import '../components/form_button.dart';
 import '../utilities/validators.dart';
 import 'sign_up_page.dart';
 import 'dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../auth/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
+  final _auth = AuthService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -76,11 +81,7 @@ class LoginPage extends StatelessWidget {
                           label: "Login",
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashboardPage()),
-                              );
+                              _login(context);
                             }
                           },
                         ),
@@ -117,5 +118,42 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _login(BuildContext context) async {
+    try {
+      final user = await _auth.loginUserWithEmailAndPassword(
+          _emailController.text, _passwordController.text);
+      log("Login Result: $user");
+      if (user == null) {
+        log("Login Failed");
+        _showToast("Incorrect username and password");
+      } else {
+        log("User Login Successfully");
+        Navigator.pushReplacementNamed(context, "/dashboard");
+      }
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        log("Firebase Login Error: ${e.code}, ${e.message}");
+        if (e.code == "user-not-found") {
+          _showToast("No account found for this email.");
+        } else if (e.code == "wrong-password") {
+          _showToast("Incorrect password.");
+        } else {
+          _showToast("An unexpected error occurred.");
+        }
+      }
+    }
+  }
+
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

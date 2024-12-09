@@ -66,8 +66,8 @@ class _DashboardPageState extends State<DashboardPage> {
               leading: const Icon(Icons.logout),
               title: const Text("Logout"),
               onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/'));
-                // Navigator.pushReplacement(context, '/main');
+                // Navigator.popUntil(context, ModalRoute.withName('/'));
+                Navigator.pushReplacementNamed(context, '/main');
               },
             ),
           ],

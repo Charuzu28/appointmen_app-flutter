@@ -3,8 +3,16 @@ import 'pages/login_page.dart';
 import 'pages/sign_up_page.dart';
 import 'pages/dashboard.dart';
 import 'pages/appointment_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase only once using the DefaultFirebaseOptions
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MainApp());
 }
 
@@ -18,8 +26,9 @@ class MainApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/signup': (context) => SignUpPage(),
-        '/dashboard': (context) => DashboardPage(),
-        '/appointment': (context) => NewAppointmentPage(),
+        '/dashboard': (context) => const DashboardPage(),
+        '/appointment': (context) => const NewAppointmentPage(),
+        '/main': (context) => LoginPage(),
       },
     );
   }
