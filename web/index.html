@@ -14,6 +14,29 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
+    <!-- Add this inside the <head> tag -->
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAxOFqo2ReC_pxRbIOG4mkfwTWZeiGIREQ",
+
+  authDomain: "appointmentsystem-d1c36.firebaseapp.com",
+
+  projectId: "appointmentsystem-d1c36",
+
+  storageBucket: "appointmentsystem-d1c36.firebasestorage.app",
+
+  messagingSenderId: "715344339543",
+
+  appId: "1:715344339543:web:8eaa2a0274791bd3607912"
+
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../components/form_input_field.dart';
 import '../components/form_button.dart';
 import '../utilities/validators.dart';
-import 'dashboard.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:developer';
 
 class SignUpPage extends StatelessWidget {
@@ -143,12 +143,27 @@ class SignUpPage extends StatelessWidget {
 
   _signup(BuildContext context) async {
     final user = await _auth.createUserWithEmailAndPassword(
-        _emailController.text, _passwordController.text);
+      _emailController.text, // Pass email
+      _passwordController.text, // Pass password
+    );
     if (user != null) {
       log("User Created Successfully");
-      Navigator.pushReplacementNamed(context, "/main");
+      Navigator.pushReplacementNamed(context, "/dashboard");
     } else {
       log("Signup Failed");
+      _showToast("Failed to create account. Please try again.");
     }
+  }
+
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black54,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
 }

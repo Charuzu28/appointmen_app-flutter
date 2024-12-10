@@ -3,7 +3,6 @@ import '../components/form_input_field.dart';
 import '../components/form_button.dart';
 import '../utilities/validators.dart';
 import 'sign_up_page.dart';
-import 'dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -123,7 +122,9 @@ class LoginPage extends StatelessWidget {
   _login(BuildContext context) async {
     try {
       final user = await _auth.loginUserWithEmailAndPassword(
-          _emailController.text, _passwordController.text);
+        _emailController.text, // Pass email
+        _passwordController.text, // Pass password
+      );
       log("Login Result: $user");
       if (user == null) {
         log("Login Failed");
